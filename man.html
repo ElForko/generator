@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<div style="margin:0 auto;width:500px;font-size:15px;line-height:1.5em;">
+<h1>Patcher Generation Tool</h1>
+
+<p>A tool that helps you quickly and easily make a patching webpage for your mod, which automatically detects the ROM a user loads and applies the proper version of your patch.  No knowledge of web development is required on your part.  This only works for SNES ROM mods at the moment.
+<br/>
+<br/></p>
+
+<h3>Contents:</h3>
+
+<p><a href="#why">Why make on online patcher</a> <br />
+<a href="#how">How to generate a patcher</a> <br />
+<a href="#github">Putting a patcher on Github</a> <br />
+<a href="#integrate">Integrating with an existing webpage</a> <br />
+<a href="#other">Other stuff</a>
+<br/>
+<br/>
+<br/></p>
+
+<h2><a name="why"></a> Why make an online patcher?</h2>
+
+<p>Applying ips files can be a pain in the ass, especially for people who haven't done it before.  First they need to find an ips patcher and figure out how to use it.  Then they'll often end up with a bad patch because the ROM header was missing (or present), or because they've patched the wrong version (and if they're <em>lucky</em> the patched ROM simply won't start; otherwise they'll get 5-30 minutes into playing before it starts glitching out).</p>
+
+<p>This generator was made to alleviate all those problems.  Once you've generated a patcher for your mod and put it online, someone who wants to play your mod can just go to your webpage, load their ROM, and the patcher does the rest.  It'll automatically add or remove the header if necessary for the patch.  If the user loads a zipped version of the ROM, it'll still be patched properly.  If they load an unsupported version of the ROM, they'll get an error that tells them what version they have and what version they need.  The patcher also performs a redundant integrity check when it finishes; if the modified ROM it produces contains a single byte with an incorrect value, the patcher emits an error instead of giving the user a glitchy ROM that appears to work when they first load it.
+<br/>
+<br/>
+<br/></p>
+
+<h2><a name="how"></a> How to generate a patcher</h2>
+
+<h4><a name="supported"></a> Step 1:</h4>
+
+<p>In the <a target="_blank" href="index.html">generator</a>, load any ROMs that you want the patcher to recognize &amp; patch, by clicking the "Browse..." button in the "Base ROMs" column in the top table.  To add more than one ROM, click the "Add supported ROM" button.  (ROM data is not saved in the patcher; see the <a href="#other">Other stuff</a> section below for more info).</p>
+
+<p>For each ROM, load the ips file used to patch it by clicking the "Browse..." button in the "Patch File" column; if you have a single ips file that will patch multiple ROM versions, load that same ips file on each row.  Also add a version descriptor in the "Version" column (e.g. "1.0 US", or "1.1 JP").</p>
+
+<p>If you have ips files for both unheadered and headered versions of the same ROM, you only need to load one of them (you won't be able to add both, since the patcher automatically adds or removes headers when necessary).  Just make sure that that ips file works with the Base ROM you loaded (headering doesn't matter for your users, but it <em>does</em> matter here, since the headering of the ROM is used to determine if the ips requires a header or not).</p>
+
+<h4><a name="unsupported"></a> Step 2:</h4>
+
+<p>If there are ROMs that your players are likely to mistakenly try patching (e.g. the EU version or version 1.1, when your patch only works on the US 1.0 version of the game), you can load these in the "Unsupported ROM" table, so your players will get specific errors telling them what version they have.  This isn't strictly necessary for the patcher to work, but it will help prevent confusion as to why a player's ROM won't patch when their ROM "works perfectly fine".</p>
+
+<h4>Step 3:</h4>
+
+<p>Fill in the title of the game that you're patching, and the title of your mod.  You can also set options pertaining to the patched ROM files that your patcher produces (e.g. the name of the file, if the file is headered, if it's zipped).</p>
+
+<h4>Step 4:</h4>
+
+<p>Hit the "Generate Patcher" button.  If there aren't any errors, a "Save Patcher" button should pop up after a few seconds; hitting that will prompt you to save a .zip containing all the files for the patcher.</p>
+
+<p>If you want to test the patcher out, extract all the contents of the zip and then double click the <em>index.html</em> file to see it in your browser (though if Chrome is your default browser, try opening it in Firefox or another browser; Chrome throws errors if you test locally with it, though once the patcher is online it will work fine with Chrome).  Also, make sure you've actually unzipped everything: if you open the <em>index.html</em> file from within your zipping program or you only extracted <em>index.html</em>, it probably won't work.</p>
+
+<h4>Step 5:</h4>
+
+<p>Put it online.  If you don't have a website or you know jack-shit about web development, don't worry; just scroll down to the <a href="#github">Putting a patcher on Github</a> section below for a walkthrough.</p>
+
+<p>If you've got a website and want to put the patcher on there, see the <a href="#integrate">Integrating with an existing webpage</a> section.</p>
+
+<p>You can play with the style of the patcher by modifying the <em>patcher.css</em> file in the <em>patcher</em> folder.
+<br/>
+<br/>
+<br/></p>
+
+<h2><a name="github"></a> Putting a patcher on GitHub</h2>
+
+<p>You can host static websites for free on <a target="_blank" href="https://github.com/">Github</a>.  The first step is to create an account (you'll need an email address for this; if you don't want to use your real one, you can create a quick burner account on <a target="_blank" href="https://protonmail.com/">Protonmail</a>).</p>
+
+<p>Once you've got a Github account, login and hit the "Start a Project" button.  Once you're on the "Create a New Repository" page, set the Repository Name to be "<strong>YourUserNameHere</strong>.github.io" (where <strong>YourUserNameHere</strong> is your github user name), and then hit the "Create Repository" button at the bottom.  Then in the "Quick Setup" section you should see a little link that says "uploading an existing file": click that, and then drag &amp; drop in the <em>index.html</em> file, the file ending with <em>cfg.js</em>, and the <em>patcher</em> and <em>patches</em> folders (you should be dragging &amp; dropping in these 4 items: if they're all inside a single folder, don't drag that folder in; grab those 4 things from within the folder).  Then hit the "commit changes" button.</p>
+
+<p>Wait a minute or so for github to get your page live, and then you should be able to go to https://<strong>YourUserNameHere</strong>.github.io and see the patcher.  Then you can share that page with anyone who wants to play your mod.
+<br/>
+<br/>
+<br/></p>
+
+<h2><a name="integrate"></a> Integrating with an existing webpage</h2>
+
+<p>First, unzip the zip that the generator produced, and then upload the <em>patcher</em> and <em>patches</em> folders to your server, along with the <strong><em>xxx</em><em></strong>cfg.js</em> file (the <strong>xxx</strong> being some semi-randomly characters the generator chose).</p>
+
+<p>Then in the html of the page you're adding the patcher to, you'll need to import all the contents of the <em>patcher</em> folder, along with that <strong>xxx</strong>cfg.js file.  This should be a total of 5 javascript imports and 1 css import (ips.js, csmd5.js, jszipmin.js, main.js, <strong>xxx</strong>cfg.js, and patcher.css).</p>
+
+<p>Finally, in the spot on your webpage where you'd like the patcher, put a div with a script tag in it that calls the <code>injectPatcher</code> function, like this: <br />
+<code style="font-size:10px;">&lt;div&gt;&lt;script&gt;injectPatcher(<strong>xxx</strong>cfg,"<strong>RelativePath</strong>/patches/");&lt;/script&gt;&lt;/div&gt;</code></p>
+
+<p>The <code>injectPatcher</code> function takes two arguments, both of which you'll have to set.  The first is a reference to an object called "<strong>xxx</strong>cfg"; replace the <strong>xxx</strong> with the same letters that precede the "cfg.js" in the name of that <strong>xxx<em></strong>cfg.js</em> file.  The second argument is a string specifying the relative path to the <em>patches</em> folder; this is similar to what you'd put for the <em>src</em> attribute of a script import, but make sure this path includes the <em>patches</em> folder itself and ends with a backslash, or else it won't be able to fetch the patches properly.</p>
+
+<p>That should do it.  You'll probably want to test the patcher out afterwards, to make sure it it's working properly.  It might be a good idea to have your browser console open when you do this: if any of the imports are screwed up then your browser will print any related errors to the console (if you get any "Invalid CORS request" errors related to .ips files, it probably means that the path to the <em>patches</em> folder in the <code>injectPatcher</code> call is off).</p>
+
+<p>If you'd like to add multiple patchers to the same page, you'll just need to upload the additional patcher's <em>patches</em> folder and it's <strong><em>yyy</em><em></strong>cfg.js</em> file, import the <strong><em>yyy</em><em></strong>cfg.js</em> file on the webpage, and then put in another div with the <code>injectPatcher</code> script (passing it the new "<strong>yyy</strong>cfg" object and the relative path to the new <em>patches</em> folder).
+<br/>
+<br/>
+<br/></p>
+
+<h2><a name="other"></a> Other stuff</h2>
+
+<p>Note that the ROMs are <strong><em>NOT</em></strong> stored in the patcher- they're only used right now by the generator to get metadata that's used to recognize the ROM when a user loads it, and to ensure that the the patches were applied correctly.  ROM data is also never transmitted over the internet, neither now when you are using the generator or later when your users are using the patcher.  All of the patching code is executed locally on each user's own machine.</p>
+
+<p>If you end up changing your ips file later, don't just swap out the ips file in the patches folder; that'll cause errors.  Rerun the generator and create a new patcher (I know, this is kind of a pain in the ass.  I might add a way to make this easier in the future).
+<br/>
+<br/>
+<br/></p>
+</div>

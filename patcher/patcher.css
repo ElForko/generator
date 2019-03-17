@@ -1,0 +1,75 @@
+/*
+
+DOM structure:
+The "injectPatcher" function injects this DOM structure into the element that
+it's called within, in the following order:
+
+patcherContainer     (The div which all subsequent elements are appended to)
+ patcherLoadDiv      (Div containing the "Browse" input/button)
+  patcherLoadInput   (The "Browse" file selection input)
+ patcherOutputText   (Div that patcher output text is printed to)
+ patcherApplyButton  (The "Apply Patch" button)
+ patcherSaveAncDiv   (The div holding the save anchor)
+  patcherSaveAnchor  (The "Click here to Save" anchor)
+
+*/
+
+
+
+.patcherContainer /* The root div in the DOM */
+{
+	font-family: monospace;
+	width: 500px;
+	margin: 0 auto;
+	padding:  5px;
+	border: 1px solid #DDD;
+	border-radius: 5px;
+}
+
+
+.patcherLoadDiv /* Div containg the "Browse..." file input/button */
+{
+
+}
+
+
+.patcherLoadInput /* The "Browse..." file selection input/button */
+{
+	/* Note: This is an "input" element, not a "button" element! */
+
+	font-family: monospace;
+	font-size: 0.8em;
+}
+
+
+.patcherOutputText  /* Div that patcher output text is printed to */
+{
+	margin-top: 10px;
+	height: 50px; /* Constant height, so changes to the text don't change div's height */
+}
+
+
+.patcherApplyButton /* The "Apply Patch" button */
+{
+
+}
+
+
+.patcherSaveAncDiv /* The div holding the save anchor */
+{
+	height: 30px; /* Constant height, so adding the Save Anchor doesn't change div's height */
+	margin-top: 20px;
+}
+
+
+.patcherSaveAnchor /* The "Click here to Save" anchor */
+{
+	/* Note: This is an "a" element, not a "button" element! */
+
+	border: 1px solid #888;
+	border-radius: 5px;
+	padding: 5px;
+	background-color: #eef;
+}
+
+

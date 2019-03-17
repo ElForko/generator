@@ -1,0 +1,32 @@
+
+
+table
+{
+	border-collapse: collapse;
+}
+
+.borderedTable>tr>th
+{
+	border: 1px solid #bbb;
+}
+
+.borderedTable>tr>td
+{
+	border: 1px solid #bbb;
+}
+
+.generatorFileInputColumn
+{
+	width: 220px;
+}
+
+.generatorVersionColumn
+{
+	width: 150px;
+}
+
+.generatorRemoveColumn
+{
+	width: 50px;
+}
+
