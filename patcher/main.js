@@ -128,6 +128,12 @@ function injectPatcher(cfg, patchPath)
 						}catch(e){console.log(e)}});
 
 					})
+					if(waits<=0)
+					{
+						applyBut.disabled = true;
+						saveDiv.innerHTML = "";
+						textDiv.innerHTML = ".zip does not contain any ROM files with a .smc or .sfc extension.";
+					}
 
 				}catch(e){console.log(e)}},function(e)
 				{
