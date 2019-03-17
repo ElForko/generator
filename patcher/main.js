@@ -110,7 +110,7 @@ function injectPatcher(cfg, patchPath)
 								if(uri>=0)
 								{
 									saveDiv.innerHTML = "";
-									textDiv.innerHTML = "This appears to be version "+cfg.usrlist[uri].ver+", which is not supported.  "+getfailtext(false);
+									textDiv.innerHTML = "This appears to be version "+cfg.usrlist[uri].ver+" of "+cfg.gamename+", which is not supported.  "+getfailtext(false);
 									applyBut.disabled = true;
 								}
 								else
