@@ -583,8 +583,8 @@ function main()
 							{
 								errstat();
 								if(headered==romDict[cs].headered) alert("Already loaded this ROM");
-								if((!headered)&&romDict[cs].headered) alert("Already loaded a headered version of this ROM.  This isn't necessary; see the DOCO");
-								if(headered&&(!romDict[cs].headered)) alert("Already loaded an unheadered version of this ROM.  This isn't necessary; see the DOCO");
+								if((!headered)&&romDict[cs].headered) alert("Already loaded a headered version of this ROM.  This isn't necessary; see the manual for more information");
+								if(headered&&(!romDict[cs].headered)) alert("Already loaded an unheadered version of this ROM.  This isn't necessary; see the manual for more information");
 								return false;
 							}
 
